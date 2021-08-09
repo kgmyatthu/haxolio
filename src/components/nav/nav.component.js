@@ -7,30 +7,40 @@ import shuffleLetters from "shuffle-letters";
 const Navigation = () => {
     const ref = useRef([]);
 
-    const handleMouseDown = (e) =>{
-        e.preventDefault();
+    const handleMouseEnter = (e) =>{
         const el = e.target;
-        shuffleLetters(el,{
-            text: el.true_label,
-            iterations: 6,
-            fps: 15,
-        })
+        if(e.target.e_witness === undefined || e.target.e_witness === false){
+            
+            shuffleLetters(el,{
+                text: el.true_label,
+                iterations: 10,
+                fps: 60,
+            })
+            
+            e.target.e_witness = true;
+        }
+        console.log(e.target.e_witness);
+    }
+    const handleMouseLeave = (e) =>{
+        e.target.e_witness = false;
+        console.log(e.target.e_witness);
     }
 
     useEffect(() => {
-        if (ref.current != null){
-            ref.current.forEach((element,i,arr) => {
+        if (ref.current[0] != null){
+            ref.current.forEach((element) => {
                 element.true_label = element.textContent;
                 shuffleLetters(element, {
                     iterations: 12,
                     fps: 15,
                 }); 
-                console.log(element.onMouseEnter);
-                element.addEventListener('mousedown',handleMouseDown);
+                element.addEventListener('mouseenter',handleMouseEnter);
+                element.addEventListener('mouseleave',handleMouseLeave);
             });
         }
         return () => {
-            window.removeEventListener('mousedown', handleMouseDown);
+            window.removeEventListener('mouseenter', handleMouseEnter);
+            window.removeEventListener('mouseleave',handleMouseLeave);
         }
     })
 

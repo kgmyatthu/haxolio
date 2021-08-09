@@ -1,4 +1,19 @@
-
+@font-face {
+  font-family: obitron;
+  src: url(./assets/fonts/Orbitron/Orbitron-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: robotomono;
+  src: url(./assets/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: signika;
+  src: url(./assets/fonts/Signika/Signika-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: oswald;
+  src: url(./assets/fonts/Oswald/Oswald-VariableFont_wght.ttf);
+}
 html,body{
   overflow-x: hidden;
 }

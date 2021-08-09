@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+.custom_container{
+    z-index: 3;
+    font-family: 'VT323', monospace;
+    letter-spacing: 4px;
+    font-size:150%;
+   
+    background-color: transparent;
+    display:flex;
+    flex-direction: row-reverse;
+}
+.item{
+    padding:2rem 3vw;
+}
+.item > a {
+    color:black;
+    text-decoration: none;
+}
+.item>a:hover{
+    text-decoration: none;
+}

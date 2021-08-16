@@ -13,34 +13,42 @@ const Navigation = () => {
             
             shuffleLetters(el,{
                 text: el.true_label,
-                iterations: 10,
-                fps: 60,
+                iterations: 20,
+                fps: 30,
             })
             
             e.target.e_witness = true;
         }
-        console.log(e.target.e_witness);
+        // console.log(e.target.e_witness);
     }
     const handleMouseLeave = (e) =>{
         e.target.e_witness = false;
-        console.log(e.target.e_witness);
+        // console.log(e.target.e_witness);
+    }
+
+    const clickHandler = (e) =>{
+        e.preventDefault();
+        const link = e.target.href;
+        window.location = link;
     }
 
     useEffect(() => {
-        if (ref.current[0] != null){
+        if (ref.current[0] !== undefined){
             ref.current.forEach((element) => {
                 element.true_label = element.textContent;
                 shuffleLetters(element, {
-                    iterations: 12,
+                    iterations: 20,
                     fps: 15,
                 }); 
-                element.addEventListener('mouseenter',handleMouseEnter);
-                element.addEventListener('mouseleave',handleMouseLeave);
+                // element.addEventListener('mouseenter',handleMouseEnter);
+                // element.addEventListener('mouseleave',handleMouseLeave);
+                // element.addEventListener('click',clickHandler);
             });
         }
         return () => {
-            window.removeEventListener('mouseenter', handleMouseEnter);
-            window.removeEventListener('mouseleave',handleMouseLeave);
+            // window.removeEventListener('mouseenter', handleMouseEnter);
+            // window.removeEventListener('mouseleave',handleMouseLeave);
+            // window.removeEventListener('click',clickHandler);
         }
     })
 

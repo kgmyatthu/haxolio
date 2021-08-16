@@ -1,0 +1,134 @@
+.canvas{
+    width:100vw;
+    height:100vh;
+    top:0;
+    left:0;
+    position:fixed;
+    z-index:-10;
+    background-color: transparent;
+}
+.intro_right, .col_right{
+    background-color: transparent;
+}
+.intro_left, .col_left{
+    background-color:transparent;
+}
+.fullvh{
+    min-height:100vh;
+}
+.halfvh{
+    min-height: 50vh;
+}
+
+.vh30{
+    min-height:30vh;
+}
+.vh70{
+    min-height:70vh;
+}
+
+.intro, .col{
+    /* text-shadow: 2px 2px 10px black; */
+    font-family: robotomono;
+    overflow: hidden;
+    color:rgb(240, 240, 240);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro_childs, .col_childs{
+    max-width:85%;
+}
+
+.img{
+    display:block;
+    max-width:100%;
+    margin:auto;
+    opacity:0;
+}
+
+.meta{
+    display:inline-flex;
+    margin-right:-5rem;
+    transform-origin: 0 100%;
+    transform: rotate(-90deg);
+    text-transform: uppercase;
+    font-size: 70%;
+}
+.align_right{
+    text-align: right;
+}
+.align_center{
+    text-align: center;
+}
+
+.logo_margins{
+    margin: 5rem 5rem;
+}
+.serv_header{
+    max-width: 80%;
+    padding:1rem;
+    display: block;
+    color:black;
+    background-color: white;
+}
+.onhover:hover, .highlight{
+    font-weight: bold;
+    color:black;
+    padding:0.2rem;
+
+    background-color: white;
+}
+.border_bottom{
+    padding:0.3rem;
+    display:block;
+    border-bottom: 2px solid white;
+}
+.contacts{
+    font-family: robotomono;
+    overflow: hidden;
+    text-align: center;
+    color:rgb(240, 240, 240);
+}
+
+.contact_links {
+    padding:0.5rem;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    color:white;
+    text-decoration: none;
+  }
+.contact_links:hover{
+    color:black;
+}
+  
+.contact_links:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 35px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    z-index: -1;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+  
+.contact_links:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+.contact_icons{
+    font-size:150%;
+    margin:1rem;
+}
+/* // Medium devices (tablets, 768px and down) */
+@media screen and(max-width: 768px) { 
+    .intro_childs, .col_childs{
+        max-width: 100%;
+    }
+  }

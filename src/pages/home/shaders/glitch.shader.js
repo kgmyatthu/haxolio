@@ -117,7 +117,7 @@ varying float vNoise;
 varying float vscroll_state;
 varying float vglitch_state;
 
-#define AMPLITUDE 15.
+#define AMPLITUDE 7.
 #define SPEED 10.
 
 
@@ -156,7 +156,7 @@ void main()
     vec4 shift = vec4pow(noise(vec2(SPEED*optimized_wave,2.0*SPEED*optimized_wave/25.0 )),8.0)
                 *vec4(AMPLITUDE,AMPLITUDE,AMPLITUDE,3.0);
     
-    shift *= vglitch_state;
+    shift *= 1. + (vglitch_state * 2.);
     c += rgbShift(p, shift);
     
 	gl_FragColor = c;

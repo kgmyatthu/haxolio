@@ -4,7 +4,7 @@
     top:0;
     left:0;
     position:fixed;
-    z-index:-10;
+    z-index:-12;
     background-color: transparent;
 }
 .intro_right, .col_right{
@@ -22,6 +22,9 @@
 
 .vh30{
     min-height:30vh;
+}
+.vh40{
+    min-height: 40vh;
 }
 .vh70{
     min-height:70vh;
@@ -49,6 +52,7 @@
 }
 
 .meta{
+    color:rgb(255, 255, 255);
     display:inline-flex;
     margin-right:-5rem;
     transform-origin: 0 100%;

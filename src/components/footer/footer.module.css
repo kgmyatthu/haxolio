@@ -1,0 +1,16 @@
+  
+.white{
+    color:white;
+}
+.mono{
+    font-family: robotomono;
+}
+.padding1{
+    padding:1rem;
+}
+.icons a{
+    color:grey;
+}
+.icons a:hover{
+    color:white;
+}

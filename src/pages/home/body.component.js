@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import gfx from './gfx.js';
 import styles from './home.module.css';
-import Shuffler from '../../components/animations/shuffler.component.js';
+import {Shuffler, ScrollIndicator} from '../../components/animations/anime.component.js';
 import {FaFacebook, FaPhone} from 'react-icons/fa';
 import {CgMail} from 'react-icons/cg';
 
@@ -18,7 +18,7 @@ import facebook from '../../assets/img/logos/fb.png';
 import github from '../../assets/img/logos/github.png';
 import phone from '../../assets/img/logos/ph.png';
 
-const Canvas = () => {
+const Body = () => {
     const canvas = useRef(null);
     const contact = useRef(null);
     const imgs = useRef([]);
@@ -40,6 +40,7 @@ const Canvas = () => {
 
     return (
         <>
+
             <div className="container-fluid">
                 <div className="container">
                     <div className="row">
@@ -217,7 +218,7 @@ const Canvas = () => {
                 </div>
                 <div className="container">
                     <div className="row">
-                            <div className={[styles.halfvh, styles.col_left, "col-12",styles.col].join(" ")}>
+                            <div className={[styles.vh40, styles.col_left, "col-12",styles.col].join(" ")}>
                                 <div className={styles.col_childs}>
                                     <small>In any case feel free to</small>
                                     <h1 className={styles.highlight}>Reach Me</h1>
@@ -228,7 +229,7 @@ const Canvas = () => {
                             <div ref={contact} className={[styles.col_right, "col-12",styles.contacts].join(" ")}>
                           
                                     
-                                    <div className={["row", styles.halfvh].join(" ")}>
+                                    <div className={["row", styles.vh40].join(" ")}>
                                         <div className="col-sm-6 col-md-4">
                                             <FaFacebook className={styles.contact_icons}/><br/>
                                             <h5>Facebook</h5>
@@ -264,4 +265,4 @@ const Canvas = () => {
     )
 }
 
-export default Canvas
+export default Body

@@ -7,7 +7,9 @@
     background-color:transparent;
     display:flex;
     width: 100%;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    justify-content: space-between;
+
 }
 .item{
     padding:2rem 3vw;
@@ -43,3 +45,22 @@
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  .bannar{
+
+    letter-spacing: 2px;
+    font-size: 110%;
+    font-family: obitron;
+    color:white;
+    padding:2rem 3vw;
+    flex-grow:1;
+  }
+  .bannar > a{
+    padding:0.5rem;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    color:white;
+    text-decoration: none;
+  }
+  

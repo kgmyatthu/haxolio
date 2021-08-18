@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import gfx from './gfx.js';
 import styles from './home.module.css';
-import {Shuffler, ScrollIndicator} from '../../components/animations/anime.component.js';
+import {Shuffler} from '../../components/animations/anime.component.js';
 import {FaFacebook, FaPhone} from 'react-icons/fa';
 import {CgMail} from 'react-icons/cg';
+import { scrollTo } from './gfx.js';
 
 //load images
 import profile_img from '../../assets/img/profile.jpg';
@@ -14,22 +15,26 @@ import ford from '../../assets/img/logos/ford.png';
 import tiktok from '../../assets/img/logos/tiktok.png';
 import torn from '../../assets/img/logos/torn.jpg';
 import capitalone from '../../assets/img/logos/capitalone.jpg';
-import facebook from '../../assets/img/logos/fb.png';
-import github from '../../assets/img/logos/github.png';
-import phone from '../../assets/img/logos/ph.png';
+import Loading from '../../components/animations/loading.component.js';
 
 const Body = () => {
     const canvas = useRef(null);
     const contact = useRef(null);
     const imgs = useRef([]);
+
     
     useEffect(() => {
-        
-        let graphicFX = new gfx({
-            dom: canvas.current,
-            img: imgs.current,
-            contact: contact.current,
-        })
+        let graphicFX;
+
+        if(canvas.current){
+            graphicFX = new gfx({
+                dom: canvas.current,
+                img: imgs.current,
+                contact: contact.current,
+            })
+        }
+    
+
         return () => {
             
             graphicFX.destroy();
@@ -38,9 +43,10 @@ const Body = () => {
         }
     }, [])
 
+
+
     return (
         <>
-
             <div className="container-fluid">
                 <div className="container">
                     <div className="row">

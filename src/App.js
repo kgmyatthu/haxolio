@@ -4,6 +4,8 @@ import { BrowserRouter as Router, HashRouter, Switch, Route } from "react-router
 import Navigation from './components/nav/nav.component';
 
 import Home from './pages/home/Home.page';
+import Notfound from './components/handler/notfound.component';
+import Loading from './components/animations/loading.component';
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
             <Home/>
           </Route>
           <Route path="*">
-            <Navigation/>
+            <Notfound/>
           </Route>
         </Switch>
       </HashRouter>

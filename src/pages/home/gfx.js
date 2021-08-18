@@ -376,10 +376,10 @@ export default class gfx{
 // I mostly need this to rescale the 3D world when screen is resized
 // this function help me build responsive 3D design
 // basically saved my ass
-function scrollTo(offset, callback) {
+export function scrollTo(offset, callback) {
     let fixedOffset = offset.toFixed();
     const onScroll = function () {
-            if (window.pageYOffset.toFixed() > fixedOffset - 1 && window.pageYOffset.toFixed() < fixedOffset + 1 ) {
+            if (window.pageYOffset.toFixed() > fixedOffset - 10 && window.pageYOffset.toFixed() < fixedOffset + 10 ) {
                 // alert("fire");
                 window.removeEventListener('scroll', onScroll)
                 callback()

@@ -93,7 +93,9 @@ export const ScrollIndicator = () => {
     const scrollHandler = (e) =>{
         const limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) - window.innerHeight;
         const normalize_scrollY = window.scrollY / limit;
-        ref.current.style.opacity = Math.abs(normalize_scrollY -1 );
+        if(ref.current){
+            ref.current.style.opacity = Math.abs(normalize_scrollY -1 );
+        }
     }
 
     useEffect(()=>{

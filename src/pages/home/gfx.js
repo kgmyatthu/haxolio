@@ -4,8 +4,22 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as THREE from "three";
 import imagesloaded from "imagesloaded";
 import noise_texture from "./shaders/noise.png";
+import { _VS as postfx_VS , _FS as postfx_FS } from './shaders/postprocessing.shader';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
+
 
 export default class gfx{
+
+    device_accelro = {
+        x: 1,
+        y: 1,
+        z: 1,
+    };
+
+    deviceMotions;
     canvas; //target element webgl will draw things to
     scene;  // this is the primary scene 
     camera; // this is a primary perspective camera
@@ -13,11 +27,14 @@ export default class gfx{
     renderer;
     width; // width of the render dom
     height; // height of the rener dom
-    effectComposer;
+    composer;
+    renderPass;
+    customPass;
     images; // this is the lists of images will apply fx to
     img_data; // this store the dimensions of the images , actual 3d obj mesh, and a img itself
     tLoader; // this is our universal texture loader
     scrollY; // this store current vertical scroll position 
+
     mouse; // this store normalized coordinate xy of our cursor 
     raycaster; // this is the primary raycast that would use to detect intersection of 3d objects 
     edgeMesh;
@@ -26,23 +43,24 @@ export default class gfx{
         this.scrollY = 0;
         this.images = configs.img; // this is the list of images that my gfx will apply to
         this.canvas = configs.dom; // this is the dom element that webgl will render things to
-    
+        
         imagesloaded(this.images , ()=>{
             scrollTo(0, ()=>{
-                    this.init();
-                    this.addCursor();
-                    this.constructEnv();
-                    this.construct3DImages();
-                    this.addEventListeners();      
-                    // this.experimental();  
-                    this.tick();
-                })
+                this.init();
+
+                this.constructEnv();
+                this.construct3DImages();
+                this.addEventListeners();    
+                this.addControls();  
+                this.postprocessing();
+                this.tick();
+            })
         });
-
- 
+        
+        
     }
-
-
+    
+    
     // this function load shader dynamically of two choice (ascii and glitch)
     getShader(name,type){
         if( name === "ascii" ){
@@ -53,7 +71,7 @@ export default class gfx{
                 return ascii_FS;
             }
         }
-
+        
         if( name === "glitch" ){
             if (type === "VS"){
                 return glitch_VS;
@@ -66,6 +84,7 @@ export default class gfx{
     
     //this initialize our class's variables
     init(){
+        
         this.mouse = { x: 0, y: 0}
         this.width =  this.canvas.offsetWidth;
         this.height = this.canvas.offsetHeight;
@@ -90,7 +109,6 @@ export default class gfx{
         this.clock = new THREE.Clock();
         this.raycaster = new THREE.Raycaster();
     }
-
     //this construct 3D plane that would act as our interactive images
     construct3DImages(){
         
@@ -204,6 +222,8 @@ export default class gfx{
                 this.updateDimensions();
                 this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
                 this.renderer.setSize(this.width, this.height);
+                this.composer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+                this.composer.setSize(this.width, this.height);
                 this.camera.aspect = this.width/this.height;
                 const fov = 2 * Math.atan((this.height/2)/this.camera.position.distanceTo(new THREE.Vector3(0,0,0))) * (180/Math.PI);
                 this.camera.fov = fov;
@@ -225,8 +245,7 @@ export default class gfx{
             img.mesh.material.uniforms.scroll_state.value = true;
         })
        
-        var limit = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) - window.innerHeight;
-        console.log(window.scrollY/limit);
+
 
         // Set a timeout to run after scrolling ends
         setTimeout(()=>{        
@@ -251,18 +270,43 @@ export default class gfx{
         if (intersects.length > 0){
             let obj = intersects[0].object;
             obj.material.uniforms.h_pos.value = intersects[0].uv;
-            this.cursorFX.visible = false;
        }
-       else{
-           this.cursorFX.visible =true;
-       }
+    }
+
+    postprocessing(){
+        this.composer = new EffectComposer(this.renderer);
+        this.renderPass = new RenderPass(this.scene, this.camera);
+        this.composer.addPass(this.renderPass);
+
+
+        this.myEffect = {
+            uniforms: {
+                "tDiffuse": { value: null },
+                "scrollSpeed": { value: 1.0 },
+                "time": { value: null },
+            },
+            vertexShader: postfx_VS,
+            fragmentShader: postfx_FS
+        }
+
+        this.customPass = new ShaderPass(this.myEffect);
+        this.customPass.renderToScreen = true;
+        this.composer.addPass(this.customPass);
+
+
+        this.smaapass = new SMAAPass( this.width * this.renderer.getPixelRatio(), this.height * this.renderer.getPixelRatio() );
+        this.composer.addPass( this.smaapass );
     }
     
     // this is the render function for each frame
     render(){
         this.img_data.forEach((img, i) =>{
-            img.mesh.rotation.y = this.mouse.x * 0.15;
-            img.mesh.rotation.x = - this.mouse.y * 0.15;
+
+
+            img.mesh.rotation.y = this.mouse.x * 0.15 * (this.device_accelro.y );
+            img.mesh.rotation.x = - this.mouse.y * 0.15 * (this.device_accelro.x );
+
+
             if(i === 0){
                 img.mesh.rotation.z = - this.scrollY * 0.001;
                 img.mesh.position.z = this.scrollY * 0.5;
@@ -275,9 +319,10 @@ export default class gfx{
                 img.mesh.material.uniforms.glitch_state.value = false;
             }
         })
-        this.updateCursorPos();
+
         this.updateImgPos();
-        this.renderer.render(this.scene, this.camera);
+        this.customPass.uniforms.time.value = this.clock.getElapsedTime();
+        this.composer.render();
     }
     
     //this update dimension of rendering dom
@@ -286,49 +331,20 @@ export default class gfx{
         this.height = this.canvas.offsetHeight;
     }
     
-    // this is the animation frame function 
+    addControls(){
+        this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+        this.controls.update();
+    }
+    experimental(){
+        
+        
+        const geometry = new THREE.SphereBufferGeometry( 300 );
+        const edges = new THREE.EdgesGeometry( geometry );
+        this.edgeMesh = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
+        this.scene.add( this.edgeMesh );
+    }
     
-    addCursor(){
-        document.body.style.cursor = "none";
-        this.cursorFX = new THREE.Mesh(
-            new THREE.CircleBufferGeometry(15,0,0,6.3),
-            new THREE.MeshBasicMaterial(),
-            )
-            this.cursorFX.renderOrder = 10;
-            let vector = new THREE.Vector3(this.mouse.x, this.mouse.y, 0);
-            vector.unproject( this.camera );
-            let dir = vector.sub( this.camera.position ).normalize();
-            let distance = - this.camera.position.z / dir.z;
-            let pos = this.camera.position.clone().add( dir.multiplyScalar( distance ) );
-            this.cursorFX.position.x = pos.x;
-            this.cursorFX.position.y = pos.y;
-            this.cursorFX.castShadow = true;
-            this.scene.add(this.cursorFX);
-        }
-        
-        updateCursorPos(){
-            const offset = {x: 10, y: -10}
-            let vector = new THREE.Vector3(this.mouse.x, this.mouse.y, 0);
-            vector.unproject( this.camera );
-            let dir = vector.sub( this.camera.position ).normalize();
-            let distance = - this.camera.position.z / dir.z;
-            let pos = this.camera.position.clone().add( dir.multiplyScalar( distance ) );
-            this.cursorFX.position.x = pos.x + offset.x;
-            this.cursorFX.position.y = pos.y + offset.y;
-        }
-        
-        
-        experimental(){
-            this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-            this.controls.update();
-
-
-            const geometry = new THREE.PlaneBufferGeometry( 300 );
-            const edges = new THREE.EdgesGeometry( geometry );
-            this.edgeMesh = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
-            this.scene.add( this.edgeMesh );
-        }
-
+    // this is the animation frame function 
     tick(){
         window.requestAnimationFrame(this.tick.bind(this));
         
@@ -366,7 +382,6 @@ function scrollTo(offset, callback) {
             if (window.pageYOffset.toFixed() > fixedOffset - 1 && window.pageYOffset.toFixed() < fixedOffset + 1 ) {
                 // alert("fire");
                 window.removeEventListener('scroll', onScroll)
-                
                 callback()
             }
         }

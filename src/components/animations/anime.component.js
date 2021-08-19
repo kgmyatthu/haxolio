@@ -108,7 +108,7 @@ export const ScrollIndicator = () => {
     },[]);
 
     return (
-        <Shuffler type="hover">
+        <Shuffler>
             <div ref={ref} className={styles.scroll_indicator}>
                 Scroll Down --{'>'}{'>'}
             </div>

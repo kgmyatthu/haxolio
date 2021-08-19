@@ -6,7 +6,7 @@ import { Shuffler } from '../animations/anime.component';
 
 
 const Navigation = () => {
-    const ref = useRef([]);
+    let ref = useRef([]);
 
     useEffect(() => {
         if (ref.current[0] !== undefined){
@@ -21,7 +21,7 @@ const Navigation = () => {
         return () => {
 
         }
-    })
+    },[])
 
     return (
         <div className={[style.custom_container].join(" ")}>

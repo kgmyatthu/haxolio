@@ -275,6 +275,7 @@ export default class gfx{
 
     postprocessing(){
         this.composer = new EffectComposer(this.renderer);
+        this.composer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderPass = new RenderPass(this.scene, this.camera);
         this.composer.addPass(this.renderPass);
 
@@ -323,6 +324,7 @@ export default class gfx{
         this.updateImgPos();
         this.customPass.uniforms.time.value = this.clock.getElapsedTime();
         this.composer.render();
+        // this.renderer.render(this.scene, this.camera);
     }
     
     //this update dimension of rendering dom

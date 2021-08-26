@@ -4,7 +4,7 @@ import { BrowserRouter as Router, HashRouter, Switch, Route } from "react-router
 import Navigation from './components/nav/nav.component';
 
 import Home from './pages/home/Home.page';
-import Notfound, { ErrorBoundary, GeneralError } from './components/handler/notfound.component';
+import Notfound, { ErrorBoundary, GeneralError } from './components/handler/handler.component';
 import Loading from './components/animations/loading.component';
 import Blog, { Article, BlogResult } from './pages/blog/blog.page';
 

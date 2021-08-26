@@ -1,0 +1,157 @@
+.post_sum{
+    color:white;
+    font-family: robotomono;
+    margin:2rem 1rem;
+}
+.post_sum a {
+  text-decoration: none;
+}
+.post_sum > div > span >  a{
+  color:green;
+  text-decoration: none;
+}
+.post_sum > div > span >  a:hover{
+  color:rgb(55, 55, 255);
+}
+
+.hl{
+    font-weight: bold;
+    color:black;
+    padding:0.2rem;
+    margin:0.2rem;
+    background-color: white;
+}
+
+.overview_title>a:hover{
+
+    text-decoration: none;
+}
+.overview_title > a {
+    display: inline-block;
+    position: relative;
+    color:white;
+    text-decoration: none;
+  }
+  
+.overview_title > a:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .overview_title > a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .intro{
+    /* border-right:2px solid white; */
+    z-index: 1;
+    position:fixed;
+    text-align: center;
+    color:white;
+    font-family: robotomono;
+}
+.intro_child{
+ 
+}
+
+
+@media (max-width: 992px) { 
+    .intro{
+        position:relative;
+        border-right:none;
+    }
+ }
+
+ .bgblack{
+  background-color: black;
+}
+.min_height100{
+  min-height: 100vh;
+}
+.min_height50{
+  min-height: 50vh;
+}
+.max_height100{
+  max-width: 100vh;
+}
+.flex_centers{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.grid_centers{
+
+  display:grid;
+  place-items:center;
+}
+
+.margin_centers {
+  display:block
+}
+.margin_centers > * {
+  margin:auto;
+}
+
+
+.icons a{
+  text-decoration: none;
+  color:grey;
+}
+.icons a:hover{
+  color:white;
+}
+
+
+.robotomono{
+  font-family: robotomono;
+}
+.oswald{
+  font-family: oswald;
+}
+.green_link{
+  color:green;
+  text-decoration: none;
+}
+
+.underline{
+  padding-bottom: 1rem;
+  border-bottom: solid 2px whitesmoke;
+}
+.markdown {
+  font-size: 90%;
+}
+.markdown  code {
+  background-color: #1d1d1d;
+}
+.markdown  pre code{
+  font-family: jbmono;
+  letter-spacing: 0.1rem;
+  font-family: monospace;
+  color: green;
+}
+.markdown  pre{
+  padding:0.5rem;
+  border:0.1em solid grey;
+  background-color: #1d1d1d;
+}
+.markdown tbody,
+.markdown td,
+.markdown tfoot,
+.markdown th,
+.markdown thead,
+.markdown tr{
+  border-color:white;
+  border:1px solid whitesmoke;
+  padding:0.5rem;
+  border-width:0.5px;
+}

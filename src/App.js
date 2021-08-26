@@ -6,7 +6,7 @@ import Navigation from './components/nav/nav.component';
 import Home from './pages/home/Home.page';
 import Notfound from './components/handler/notfound.component';
 import Loading from './components/animations/loading.component';
-import Blog from './pages/blog/blog.page';
+import Blog, { Article } from './pages/blog/blog.page';
 
 function App() {
   return (
@@ -19,6 +19,9 @@ function App() {
           </Route>
           <Route exact path="/blog">
             <Blog/>
+          </Route>
+          <Route exact path="/blog/:slug">
+            <Article/>
           </Route>
           <Route path="*">
             <Notfound/>

@@ -60,7 +60,7 @@ export const Shuffler = ({type, children}) => {
                 window.addEventListener("scroll",(e)=>{
                     setTimeout(()=>{
                         scrollHandler(e, element);
-                    },500);
+                    },100);
                 });
             }
 

@@ -1,6 +1,6 @@
 # What's Haxolio
 
-Haxolio is a stylish portfolio template with mini markdown blog renderer written in React. Haxolio utilized hash routing meaning it is fully compitable to host on github pages and other static site hosting platform. The api for blog is powered by an API server called [Haxolio-api](https://github.com/kmt29/haxolio-api). Using github pages to host the frontend and heroku to host backend api server is a recommended architecture as it cost absolutely nothing.
+Haxolio is a stylish portfolio template with mini markdown blog renderer written in React. Haxolio utilized hash routing meaning it is fully compitable to host on github pages and other static site hosting platform. The api for blog is powered by an API server called [Haxolio-api](https://github.com/kmt29/haxolio-api). Haxolio uses threejs to applied 3D effect of images with custom shaders written in glsl.
 
 # Quickpeak
 
@@ -90,3 +90,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Disclaimer
+
+The GLSL shader code used in this project is from shadertoy website with modification of my own.
+
+# Code of conduct
+
+You are free to use this project under for both personal and commercial with a proper credits.

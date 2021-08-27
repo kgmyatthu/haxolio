@@ -59,7 +59,7 @@ export const ArticleLists = () => {
 
     return (
         <IntroFixedCol>
-
+            { articles === null? <DataNotFound/>: <></>}
             <div style={{maxWidth:"80%", display:"grid"}}>
                 {   articles ? 
                     articles.map((item, index) => {    

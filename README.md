@@ -1,3 +1,25 @@
+# What's Haxolio
+
+Haxolio is a stylish portfolio template with mini markdown blog renderer written in React. Haxolio utilized hash routing meaning it is fully compitable to host on github pages and other static site hosting platform. The api for blog is powered by an API server called [Haxolio-api](https://github.com/kmt29/haxolio-api). Using github pages to host the frontend and heroku to host backend api server is a recommended architecture as it cost absolutely nothing.
+
+# Quickpeak
+
+![demo gif](/example/example.gif)
+
+# Live Demo
+
+Checkout [Mg Thura Moe Myint's Porfolio](https://thuramoemyint.com).
+
+
+# Intended Architecture
+
+```
+| Heroku (free) |       |  Github Page (free) |
+| ------------- |  -->  | ------------------- |
+| Haxolio-api   |       |   Haxolio           |
+```
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

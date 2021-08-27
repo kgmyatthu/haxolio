@@ -1,10 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import gfx from './gfx.js';
 import styles from './home.module.css';
 import {Shuffler} from '../../components/animations/anime.component.js';
 import {FaFacebook, FaPhone} from 'react-icons/fa';
 import {CgMail} from 'react-icons/cg';
-import { scrollTo } from './gfx.js';
 
 //load images
 import profile_img from '../../assets/img/profile.jpg';
@@ -15,7 +14,6 @@ import ford from '../../assets/img/logos/ford.png';
 import tiktok from '../../assets/img/logos/tiktok.png';
 import torn from '../../assets/img/logos/torn.jpg';
 import capitalone from '../../assets/img/logos/capitalone.jpg';
-import Loading from '../../components/animations/loading.component.js';
 
 const Body = () => {
     const canvas = useRef(null);

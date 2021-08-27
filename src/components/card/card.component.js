@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './card.module.css'
 import  {IoPricetagsSharp}  from "react-icons/io5"
-import {CgCalendarDates, CgWindows} from "react-icons/cg"
+import {CgCalendarDates} from "react-icons/cg"
 import {AiOutlineCaretRight} from "react-icons/ai"
 import { Shuffler } from '../animations/anime.component'
 import { Link } from 'react-router-dom'
@@ -85,7 +85,7 @@ export const IntroFixedCol = ({children}) =>{
                     <div className={`col-md-12 col-lg-4 ${styles.min_height100} ${styles.flex_centers} ${styles.intro}`}>
                         <h1>BLOG</h1>
                         <div>
-                            <img className="rounded" src={profile} style={{width:"40%"}}></img>
+                            <img className="rounded" src={profile} alt="profile" style={{width:"40%"}}></img>
                             <Shuffler>
                                 <div>_</div>
                                 <h4>Thura Moe Myint</h4>

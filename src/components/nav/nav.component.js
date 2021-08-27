@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import style from './nav.module.css';
 import { Link } from 'react-router-dom';
 import shuffleLetters from "shuffle-letters";
-import { Shuffler } from '../animations/anime.component';
-
 
 const Navigation = ({pad}) => {
     let ref = useRef([]);

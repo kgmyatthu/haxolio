@@ -5,7 +5,7 @@ import {ArticleOverview, IntroFixedCol} from '../../components/card/card.compone
 import { DataNotFound } from '../../components/handler/handler.component'
 
 
-import { CgPlayTrackNext, CgPlayTrackPrev, CgWindows } from 'react-icons/cg'
+import { CgPlayTrackNext, CgPlayTrackPrev } from 'react-icons/cg'
 import Loading from '../../components/animations/loading.component'
 
 export const ArticleLists = () => {

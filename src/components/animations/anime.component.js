@@ -1,6 +1,5 @@
 import React, {useEffect, useRef } from 'react'
 import shuffleLetters from "shuffle-letters";
-import { ExtrudeBufferGeometry } from 'three';
 import styles from './anime.module.css';
 
 export const Shuffler = ({type, children}) => {

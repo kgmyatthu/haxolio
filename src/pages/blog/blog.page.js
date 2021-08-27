@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import React, { useEffect } from 'react'
 import Navigation from "../../components/nav/nav.component";
 import {ArticleLists, ArticleSearchResult} from "./body.component.js";
 import {ArticleDetail, IntroFixedCol} from '../../components/card/card.component';

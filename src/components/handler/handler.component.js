@@ -22,7 +22,7 @@ export const DataNotFound = () =>{
         <div className={styles.data_not_found}>
             <div className={styles.data_not_found_child}>
                 <h1><small>0x</small>404</h1>
-                <p>Data Doesnt seem to be exist</p>
+                <p>Data Doesnt seem to be exist, or we'd failed to fetch it, try refreshing</p>
             </div>
         </div>
     )

@@ -22,7 +22,7 @@ const Footer = () => {
                         <span className={styles.icons} style={{margin:"0.5rem"}}><a href="https://www.linkedin.com/in/kaung-myat-thu-3925531b6/" target="_blank" rel="noreferrer"><FaLinkedin size={20}/></a></span>
                     </p>
                     <small className="text-muted">
-                        This react template is open-source and contributions are welcome. <a  href="https://github.com/kmt29/haxio" target="_blank" rel="noreferrer">Contribute here</a>.
+                        This react template is open-source and contributions are welcome. <a  href="https://github.com/kmt29/haxolio" target="_blank" rel="noreferrer">Contribute here</a>.
                     </small>
                 </div>
             </div>

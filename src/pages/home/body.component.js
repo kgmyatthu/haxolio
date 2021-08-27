@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import gfx from './gfx.js';
 import styles from './home.module.css';
 import {Shuffler} from '../../components/animations/anime.component.js';
 import {FaFacebook, FaPhone} from 'react-icons/fa';
 import {CgMail} from 'react-icons/cg';
-
+import imagesLoaded from 'imagesloaded';
 //load images
 import profile_img from '../../assets/img/profile.jpg';
 import profile_img2 from '../../assets/img/profile2.jpg';
@@ -14,37 +14,43 @@ import ford from '../../assets/img/logos/ford.png';
 import tiktok from '../../assets/img/logos/tiktok.png';
 import torn from '../../assets/img/logos/torn.jpg';
 import capitalone from '../../assets/img/logos/capitalone.jpg';
+import Loading from '../../components/animations/loading.component.js';
 
 const Body = () => {
-    const canvas = useRef(null);
-    const contact = useRef(null);
-    const imgs = useRef([]);
+    let canvas = useRef(null);
+    let contact = useRef(null);
+    let imgs = useRef([]);
+    let [loading, setLoading] = useState(true);
+
 
     
     useEffect(() => {
-        let graphicFX;
+        let gfx_effects;
 
         if(canvas.current){
-            graphicFX = new gfx({
+            gfx_effects = new gfx({
                 dom: canvas.current,
                 img: imgs.current,
                 contact: contact.current,
             })
+
+            imagesLoaded(imgs.current , ()=>{
+                setLoading(false);
+            });
+
         }
     
-
         return () => {
-            
-            graphicFX.destroy();
-            graphicFX = {};
+            gfx_effects.destroy();
+            gfx_effects = {};
             console.log("cleaned up");
         }
     }, [])
 
 
-
     return (
         <>
+            {loading ? <Loading/> : <></>}
             <div className="container-fluid">
                 <div className="container">
                     <div className="row">

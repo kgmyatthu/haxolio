@@ -38,6 +38,7 @@ export default class gfx{
     mouse; // this store normalized coordinate xy of our cursor 
     raycaster; // this is the primary raycast that would use to detect intersection of 3d objects 
     edgeMesh;
+    eventHandlerBinds;
 
     constructor(configs){
         this.scrollY = 0;
@@ -47,7 +48,6 @@ export default class gfx{
         imagesloaded(this.images , ()=>{
             scrollTo(0, ()=>{
                 this.init();
-
                 this.constructEnv();
                 this.construct3DImages();
                 this.addEventListeners();    
@@ -202,14 +202,19 @@ export default class gfx{
 
     // this add necessary event listeners
     addEventListeners(){
-        window.addEventListener('scroll', this.scrollHandler.bind(this));
-        window.addEventListener("resize", this.resizeHandler.bind(this));
-        window.addEventListener("mousemove", this.mouseMoveHandler.bind(this));
+        this.eventHandlerBinds = {
+            scroller : this.scrollHandler.bind(this),
+            resizer : this.resizeHandler.bind(this),
+            mouseMover : this.mouseMoveHandler.bind(this)
+        }
+        window.addEventListener('scroll', this.eventHandlerBinds.scroller);
+        window.addEventListener("resize", this.eventHandlerBinds.resizer);
+        window.addEventListener("mousemove", this.eventHandlerBinds.mouseMover);
     }
     removeEventListener(){
-        window.removeEventListener('scroll', this.scrollHandler.bind(this));
-        window.removeEventListener("resize", this.resizeHandler.bind(this));
-        window.removeEventListener("mousemove", this.mouseMoveHandler.bind(this));
+        window.removeEventListener('scroll', this.eventHandlerBinds.scroller);
+        window.removeEventListener("resize", this.eventHandlerBinds.resizer);
+        window.removeEventListener("mousemove", this.eventHandlerBinds.mouseMover);
     }
     // this function recalculate the projection matrix of camera and recale 3D world after resize
     resizeHandler(e){

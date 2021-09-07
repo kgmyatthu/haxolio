@@ -38,7 +38,7 @@ export default class gfx{
     mouse; // this store normalized coordinate xy of our cursor 
     raycaster; // this is the primary raycast that would use to detect intersection of 3d objects 
     edgeMesh;
-    eventHandlerBinds;
+    bindedFunctions;
 
     constructor(configs){
         this.scrollY = 0;
@@ -48,7 +48,6 @@ export default class gfx{
         imagesloaded(this.images , ()=>{
             scrollTo(0, ()=>{
                 this.init();
-                this.constructEnv();
                 this.construct3DImages();
                 this.addEventListeners();    
                 this.addControls();  
@@ -84,11 +83,11 @@ export default class gfx{
     
     //this initialize our class's variables
     init(){
-        
+
         this.mouse = { x: 0, y: 0}
         this.width =  this.canvas.offsetWidth;
         this.height = this.canvas.offsetHeight;
-        this.scene = new THREE.Scene();
+        this.scene = new THREE.Scene()
 
         const far = 2000;
         const dist = 500; // this is the distance between camera and vector3(0,0,0);
@@ -183,38 +182,22 @@ export default class gfx{
         
     }
     
-    constructEnv(){
-        this.wall = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry(this.width*1.2, this.height*1.2, 10,10),
-            new THREE.MeshStandardMaterial({
-                color:0xffffff,
-            }),
-        )
-        this.wall.position.z = - 300;
-        this.wall.receiveShadow = true;
-        this.scene.add(this.wall);
-    }
-    deconstructEnv(){
-        this.wall.geometry.dispose();
-        this.wall.material.dispose();
-        this.scene.remove(this.wall);
-    }
 
     // this add necessary event listeners
     addEventListeners(){
-        this.eventHandlerBinds = {
+        this.bindedFunctions = {
             scroller : this.scrollHandler.bind(this),
             resizer : this.resizeHandler.bind(this),
             mouseMover : this.mouseMoveHandler.bind(this)
         }
-        window.addEventListener('scroll', this.eventHandlerBinds.scroller);
-        window.addEventListener("resize", this.eventHandlerBinds.resizer);
-        window.addEventListener("mousemove", this.eventHandlerBinds.mouseMover);
+        window.addEventListener('scroll', this.bindedFunctions.scroller);
+        window.addEventListener("resize", this.bindedFunctions.resizer);
+        window.addEventListener("mousemove", this.bindedFunctions.mouseMover);
     }
     removeEventListener(){
-        window.removeEventListener('scroll', this.eventHandlerBinds.scroller);
-        window.removeEventListener("resize", this.eventHandlerBinds.resizer);
-        window.removeEventListener("mousemove", this.eventHandlerBinds.mouseMover);
+        window.removeEventListener('scroll', this.bindedFunctions.scroller);
+        window.removeEventListener("resize", this.bindedFunctions.resizer);
+        window.removeEventListener("mousemove", this.bindedFunctions.mouseMover);
     }
     // this function recalculate the projection matrix of camera and recale 3D world after resize
     resizeHandler(e){
@@ -353,7 +336,8 @@ export default class gfx{
     
     // this is the animation frame function 
     tick(){
-        window.requestAnimationFrame(this.tick.bind(this));
+        this.bindedFunctions = {...this.bindedFunctions, ...{tick: this.tick.bind(this)}}
+        window.requestAnimationFrame(this.bindedFunctions.tick);
         
         if(this.controls){
             this.controls.update();
@@ -361,16 +345,27 @@ export default class gfx{
 
         this.render();
     }
+
+
     
     destroy(){
         document.body.style.cursor = "auto";
         this.removeEventListener();
+
+        this.img_data.map(img => {
+            img.mesh.geometry.dispose();
+            img.mesh.material.dispose();
+            this.scene.remove(img.mesh);
+        })
+
+        this.scene = null;
         
-        for(let child in this.scene.children){
-            this.scene.remove(child);
-        }
+        this.camera = null;
+
+        this.renderer.renderLists.dispose()
+        this.renderer = null
         
-        window.cancelAnimationFrame(this.tick.bind(this));
+        window.cancelAnimationFrame(this.bindedFunctions.tick);
         
     }
 }

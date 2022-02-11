@@ -1,5 +1,6 @@
 import { _VS as ascii_VS, _FS as ascii_FS } from "./shaders/ascii.shader";
 import { _VS as glitch_VS, _FS as glitch_FS } from "./shaders/glitch.shader";
+import { _VS as generic_VS, _FS as generic_FS } from "./shaders/generic.shader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as THREE from "three";
 import imagesloaded from "imagesloaded";
@@ -77,6 +78,14 @@ export default class gfx{
             }
             if(type === "FS"){
                 return glitch_FS;
+            }
+        }
+        if( name === "generic" ){
+            if (type === "VS"){
+                return generic_VS;
+            }
+            if(type === "FS"){
+                return generic_FS;
             }
         }
     }

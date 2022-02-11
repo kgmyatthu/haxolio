@@ -32,10 +32,10 @@ const Navigation = ({pad}) => {
             <div ref={nav} className={[style.custom_container].join(" ")}>
                 <div className={[style.bannar].join(" ")}>
                     <Link to="#" ref={(el)=>{ref.current.push(el);}}>
-                        0xthura
+                        0xk3t
                     </Link>
                 </div>
-                <div className={[style.item].join(" ")}>
+                {/*<div className={[style.item].join(" ")}>
                     <Link to="/" ref={(el)=>{ref.current.push(el);}}>
                         Home
                     </Link>
@@ -44,7 +44,7 @@ const Navigation = ({pad}) => {
                     <Link to="/blog" ref={(el)=>{ref.current.push(el);}}>
                         Blog
                     </Link>
-                </div>
+                </div>*/}
             </div>
             {pad ? <div style={{height: gap}}></div>: <></>}
         </>

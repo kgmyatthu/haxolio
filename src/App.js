@@ -16,7 +16,7 @@ function App() {
               <Route exact path="/">
                 <Home/>
               </Route>
-              <Route exact path="/blog">
+      {/*<Route exact path="/blog">
                 <Blog/>
               </Route>
               <Route exact path="/blog/:slug">
@@ -24,7 +24,7 @@ function App() {
               </Route>
               <Route exact path="/blog/search/:keyword">
                 <BlogResult/>
-              </Route>
+              </Route>*/}
               <Route path="*">
                 <Notfound/>
               </Route>

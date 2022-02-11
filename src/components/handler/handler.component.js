@@ -28,6 +28,17 @@ export const DataNotFound = () =>{
     )
 }
 
+export const NoWebGL = () =>{
+    return (
+        <div className={styles.notfound}>
+            <div className={styles.notfound_child}>
+                <h1><small>0x</small>Unfortunate</h1>
+                <p>Your browser does not support WEBGL 3D capabilities which this site require please use different browser</p>
+            </div>
+        </div>
+    )
+}
+
 
 export const GeneralError = () => {
     return (

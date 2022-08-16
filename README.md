@@ -19,6 +19,9 @@ Checkout [Mg Thura Moe Myint's Porfolio](https://thuramoemyint.com).
 | Haxolio-api   |       |   Haxolio           |
 ```
 
+# Code of conduct
+
+You are free to use this project under for both personal and commercial with a proper credits. Just don't be a dick and say it's yours.
 
 # Getting Started with Create React App
 
@@ -95,6 +98,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 The GLSL shader code used in this project is from shadertoy website with modification of my own.
 
-# Code of conduct
-
-You are free to use this project under for both personal and commercial with a proper credits.
